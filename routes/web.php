@@ -90,7 +90,7 @@ Route::get('/calcform', function(){
 });
 
 
-// 6.1 Teste com blade :: heranca
+// 6.1  Teste com blade :: heranca
 Route::view('/view/heranca', 'blade.testeA');
 
 // 6.2 Teste com blade :: Componente e Slot
