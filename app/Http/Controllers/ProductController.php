@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -60,13 +61,46 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\StoreUpdateProductRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    // public function store(Request $request)
+    public function store(StoreUpdateProductRequest $request)
     {
-        dd('Cadastrando...');
+        dd('ok');
+        // dd($request->all());
+        // dd($request->name);
+        // dd($request->only(['name', 'description']));
+        // dd($request->has('name')); //existe ou ñ
+        // dd($request->input('name', 'default'));
+        // dd($request->except('_token'));
+        
+        // VALIDAÇÃO
+        // $request->validate([
+        //     'name' => 'required|min:3|max:255',
+        //     'description' => 'nullable|min:3|max:1000',
+        //     'photo' => 'required|image',
+        //      ]);
+        // dd('ok');
+        // FIM VALIDAÇÃO
+
+        if ($request->file('photo')->isValid()) 
+        {
+            // dd($request->photo->getClientOriginalName()); // pega o nome original
+            // dd($request->photo->extension()); // pega a extensão
+            
+            $nameFile = $request->name. '.'. $request->photo->extension();
+            dd($request->photo->storeAs('products', $nameFile)); // op. nome personalizado
+            // dd($request->photo->store('products'));
+
+        } 
+        else
+        {
+            return 'deu zebra no upload do arquivo ProductController@store';
+        }
     }
+
 
     /**
      * Display the specified resource.
