@@ -4,7 +4,8 @@
 // INÍCIO - SESSÕES
 //
 
-Route::get('sessao/login', 'SessaoController@index')->name('sessao.index');
+Route::get('sessao/teste', 'SessaoController@teste'); // rota p teste
+Route::get('sessao', 'SessaoController@index')->name('sessao.index');
 Route::post('sessao/bemvindo', 'SessaoController@logado')->name('sessao.logado');
 
 //
